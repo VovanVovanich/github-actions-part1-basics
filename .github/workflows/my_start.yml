@@ -5,6 +5,9 @@
 #
 
 name: My-GitHubActins-Basics
+env:
+  APPLICATION_NAME    : "MyFlask" 
+  DEPLOY_PACKAGE_NAME : "flask-deploy-ver-$({ githab.sha })"
 
 # Controls when the workflow will run
 on:
@@ -25,6 +28,12 @@ jobs:
       - name: Print Hello Message in testing
         run : echo "Hello World from Testing job"
         
+      - name: Execure few commands
+        run : |
+          echo "Hello Message1"
+          echo "Hello Message2"
+          echo "Application name: $({ env.APPLICATION_NAME })"
+          
 
   my_deploy:  
     runs-on: ubuntu-latest
@@ -33,3 +42,6 @@ jobs:
     steps:
       - name: Print Hello Message in deploy
         run : echo "Hello World from Deploy job"
+        
+      - name: Printing Deployment package
+        run : echo "Deploy package name is $({ env.DEPLOY_PACKAGE_NAME })
